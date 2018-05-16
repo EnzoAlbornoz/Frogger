@@ -16,17 +16,19 @@ public class FrogGame extends JPanel implements Runnable,KeyListener{
 	private int FPS = 60;
 	private long targetTime = 1000 / FPS;
 	//DIMENÇÕES DO JOGO
-	private static final int width  = 800;
-	private static final int height = 600;
+	public static final int WIDTH  = 800;
+	public static final int HEIGHT = 600;
 	//COISAS DE THREAD
 	private Thread thread;
-	private boolean isPaused = false;
+	private boolean isPaused = true;
 	//GAME STATE MANAGER
 	private GameStateManager gsm;
 	//CONSTRUTOR
 	public FrogGame() {
+		//INSTANCIA O GERNECIADOR DE ESTADOS
+		gsm = new GameStateManager();
 		setBackground(Color.BLACK);
-		setPreferredSize(new Dimension(width,height));
+		setPreferredSize(new Dimension(WIDTH,HEIGHT));
 		setFocusable(true);
 		requestFocus();
 		addKeyListener(this);
@@ -35,6 +37,7 @@ public class FrogGame extends JPanel implements Runnable,KeyListener{
 	//AVISA QUE O PANEL FOI INICIALIZADO
 	public void addNotify() {
 		super.addNotify();
+		isPaused = false;
 		startGame();
 	}
 	//INICALIZAÇÃO DO THREAD
@@ -61,8 +64,6 @@ public class FrogGame extends JPanel implements Runnable,KeyListener{
 		long elapsed;
 		long wait;
 		
-		//INSTANCIA O GERNECIADOR DE ESTADOS
-		gsm = new GameStateManager();
 		
 		//GAME-LOOP
 		while(!isPaused) {
@@ -74,7 +75,7 @@ public class FrogGame extends JPanel implements Runnable,KeyListener{
 			
 			/*FIM DO UPTADE*/			
 			elapsed = System.nanoTime() - start;
-			wait = targetTime - (elapsed / 1000000);
+			wait = Math.abs(targetTime - (elapsed / 1000000));
 			
 			try {
 				thread.sleep(wait);
@@ -87,14 +88,15 @@ public class FrogGame extends JPanel implements Runnable,KeyListener{
 	
 	private synchronized void gameUpdate() {
 		if (!isPaused) {
-			gsm.update();								//Update state variables
+			gsm.update();								//DÁ UPDATE NAS VARIAVEIS DO JOGO
 		}
 	}
 	
 	protected synchronized void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.clearRect(0, 0, width, height);
-		gsm.draw((Graphics2D) g);
+		g.clearRect(0, 0, WIDTH, HEIGHT);
+		gsm.draw(g);
+
 		
 	}
 	
@@ -124,8 +126,6 @@ public class FrogGame extends JPanel implements Runnable,KeyListener{
 		gsm.keyReleased(e.getKeyCode());
 	}
 	
-	@Override
 	public void keyTyped(KeyEvent e) {}
-
 	
 }
