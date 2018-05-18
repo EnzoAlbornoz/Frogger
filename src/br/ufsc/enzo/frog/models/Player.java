@@ -29,7 +29,7 @@ public class Player {
 	private boolean   left = false;
 	private boolean   down = false;
 	private int before = 0;
-	private int pressed = 0;
+	private boolean pressed = false;
 	
 	public Player(int x,int y) {
 		posX = x;
@@ -40,7 +40,7 @@ public class Player {
 	}
 	
 	public void update() {
-			move();
+		move();
 	}
 
 	
@@ -50,52 +50,51 @@ public class Player {
 
 	
 	public void keyPressed(int k) {
-		if(pressed == 0) {
-		if (k == Keyboard.UP_KEY)    {
-			up = true;
-			pressed = 1;
-			return;
+		if(!pressed)
+			if (k == Keyboard.UP_KEY)    {
+				up = true;
+				pressed = true;
+				return;
 
-		}
-		if (k == Keyboard.RIGHT_KEY) {
-			right = true;
-			pressed = 1;
-			return;
+			}
+			if (k == Keyboard.RIGHT_KEY) {
+				right = true;
+				pressed = true;
+				return;
 
-		}
-		if (k == Keyboard.LEFT_KEY)  {
-			left = true;
-			pressed = 1;
-			return;
+			}
+			if (k == Keyboard.LEFT_KEY)  {
+				left = true;
+				pressed = true;
+				return;
 
-		}
-		if (k == Keyboard.DOWN_KEY)  {
-			down = true;
-			pressed = 1;
-			return;
-		}
-		}
+			}
+			if (k == Keyboard.DOWN_KEY)  {
+				down = true;
+				pressed = true;
+				return;
+			}
 	}
 	
 	public void keyReleased(int k) {
 		if (k == Keyboard.UP_KEY)    {
 			up    = false;
-			pressed = 0;
+			pressed = false;;
 
 		}
 		if (k == Keyboard.RIGHT_KEY) {
 			right = false;
-			pressed = 0;
+			pressed = false;;
 
 		}
 		if (k == Keyboard.LEFT_KEY)  {
 			left  = false;
-			pressed = 0;
+			pressed = false;;
 
 		}
 		if (k == Keyboard.DOWN_KEY)  {
 			down  = false;
-			pressed = 0;
+			pressed = false;;
 
 		}
 	}
@@ -104,18 +103,22 @@ public class Player {
 		if(up    && posY > 0  ) {
 			posY -= 1 * SCALE;
 			before=0;
+			return;
 		}
-		if(right && posX < 700) {
+		if(right && posX+WIDTH < 700) {
 			posX += 1 * SCALE;
 			before=1;
+			return;
 		}
 		if(left  && posX > 100) {
 			posX -= 1 * SCALE;
 			before=2;
+			return;
 		}
-		if(down  && posY < 600) {
+		if(down  && posY+HEIGHT < 600) {
 			posY += 1 * SCALE;
 			before=3;
+			return;
 		}
 	}
 }
