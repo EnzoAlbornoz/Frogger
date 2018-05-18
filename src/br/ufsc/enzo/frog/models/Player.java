@@ -22,13 +22,14 @@ public class Player {
 	private static final int SCALE  = 10;
 	private static final int WIDTH  = 48;
 	private static final int HEIGHT = 48;
-	private BufferedImage[] spriteList;
+	private BufferedImage[][] spriteList;
 	//MOVIMENTAÇÃO
 	private boolean     up = false;
 	private boolean  right = false;
 	private boolean   left = false;
 	private boolean   down = false;
 	private int before = 0;
+	private int pressed = 0;
 	
 	public Player(int x,int y) {
 		posX = x;
@@ -44,47 +45,57 @@ public class Player {
 
 	
 	public void draw(Graphics g) {
-		g.drawImage(spriteList[0], 0, 0, null);
+		g.drawImage(spriteList[0][0], posX, posY, null);
 	}
 
 	
 	public void keyPressed(int k) {
+		if(pressed == 0) {
 		if (k == Keyboard.UP_KEY)    {
 			up = true;
+			pressed = 1;
 			return;
 
 		}
 		if (k == Keyboard.RIGHT_KEY) {
 			right = true;
+			pressed = 1;
 			return;
 
 		}
 		if (k == Keyboard.LEFT_KEY)  {
 			left = true;
+			pressed = 1;
 			return;
 
 		}
 		if (k == Keyboard.DOWN_KEY)  {
 			down = true;
+			pressed = 1;
 			return;
+		}
 		}
 	}
 	
 	public void keyReleased(int k) {
 		if (k == Keyboard.UP_KEY)    {
 			up    = false;
+			pressed = 0;
 
 		}
 		if (k == Keyboard.RIGHT_KEY) {
 			right = false;
+			pressed = 0;
 
 		}
 		if (k == Keyboard.LEFT_KEY)  {
 			left  = false;
+			pressed = 0;
 
 		}
 		if (k == Keyboard.DOWN_KEY)  {
 			down  = false;
+			pressed = 0;
 
 		}
 	}
