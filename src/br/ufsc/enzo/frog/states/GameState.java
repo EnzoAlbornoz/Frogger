@@ -16,4 +16,5 @@ public abstract class GameState {
 	public abstract void draw(Graphics g);
 	public abstract void keyPressed(int k);
 	public abstract void keyReleased(int k);
+	public abstract void keyTyped(int k);
 }

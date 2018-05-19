@@ -37,4 +37,6 @@ public class ControlsState extends GameState {
 
 		
 	}
+	
+	public void keyTyped(int k) {}
 }

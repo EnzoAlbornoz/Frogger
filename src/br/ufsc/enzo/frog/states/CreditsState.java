@@ -37,5 +37,7 @@ public class CreditsState extends GameState {
 
 		
 	}
+
+	public void keyTyped(int k) {}
 	
 }

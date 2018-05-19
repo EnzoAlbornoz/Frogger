@@ -46,4 +46,8 @@ public class PlayState extends GameState {
 
 	}
 	
+	public void keyTyped(int k) {
+		player.keyTyped(k);
+	}
+	
 }
