@@ -59,11 +59,16 @@ public class Sprite {
 		int heightFrames = sheet.getHeight() / size;
 		System.out.println(heightFrames);
 		BufferedImage[][] out = new BufferedImage[heightFrames][widthFrames];
-		for(int i = 0;i < heightFrames;i++) {
-			for(int j = 0;j < widthFrames;j++) {
-				out[i][j] = sheet.getSubimage(j * size, i * size, size, size);
-				System.out.println("sub image "+i+j+" created");
+		try {
+			for(int i = 0;i < heightFrames;i++) {
+				for(int j = 0;j < widthFrames;j++) {
+					out[i][j] = sheet.getSubimage(j * size, i * size, size, size);
+					System.out.println("sub image "+i+j+" created");
+				}
 			}
+		}catch(Exception e) {
+			System.err.println("Não Foi Possivel Criar A Imagem");
+			e.printStackTrace();
 		}
 		return out;
 	}
@@ -83,11 +88,12 @@ public class Sprite {
 	
 	public static BufferedImage[] createLinearSpriteList(String filePath,int size) {
 		BufferedImage[][] m = createSpriteList(filePath, size);
-		BufferedImage[] out = new BufferedImage[m.length*m[0].length];
+		BufferedImage[] out = new BufferedImage[(m.length*m[0].length)];
 		int c = 0;
 		for(int i = 0;i < m.length;i++) {
 			for(int j = 0;j < m[0].length;j++) {
 				out[c] = m[i][j];
+				c++;
 			}
 		}
 		
