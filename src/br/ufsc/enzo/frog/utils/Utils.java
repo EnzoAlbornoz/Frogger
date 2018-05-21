@@ -55,8 +55,7 @@ public class Utils {
 		
 		BufferedImage img = image;
 		Graphics2D g2d = img.createGraphics();
-		g2d.transform(transform);
-		
+		g2d.transform(transform);		
 		return img;
 	}
 }

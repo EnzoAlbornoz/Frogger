@@ -16,4 +16,5 @@ public class FrogApp {
 		frame.setResizable(false);
 		frame.setVisible(true);
 	}
+	
 }

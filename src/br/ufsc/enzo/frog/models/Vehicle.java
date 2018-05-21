@@ -47,4 +47,16 @@ public class Vehicle {
 		posX += velocity;
 	}
 	
+	public Rectangle getRect() {
+		return rect;
+	}
+	
+	//COLISION---------------------------------
+	public boolean colides(Player player) {
+		if(rect.intersects(player.getRect())) {
+			return true;
+		}
+		return false;
+	}
+	
 }

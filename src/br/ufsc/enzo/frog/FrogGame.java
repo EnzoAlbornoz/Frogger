@@ -71,8 +71,8 @@ public class FrogGame extends JPanel implements Runnable,KeyListener{
 			start = System.nanoTime();
 			
 			/*UPDATE DA TELA*/
-			gameUpdate();
 			repaint();
+			gameUpdate();
 			
 			/*FIM DO UPTADE*/			
 			elapsed = System.nanoTime() - start;

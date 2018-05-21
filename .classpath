@@ -7,6 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="res"/>
-	<classpathentry kind="lib" path="/home/enzo/Downloads/JPlay.jar"/>
+	<classpathentry kind="lib" path="/home/100000000901519/github/MyGamePOO1/libs/JPlay.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

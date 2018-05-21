@@ -3,6 +3,8 @@ package br.ufsc.enzo.frog.models;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
@@ -15,6 +17,8 @@ import jplay.URL;
 
 @SuppressWarnings("serial")
 public class Player {
+	//VARIÁVEIS DE GAMEPLAY
+	private int points;
 	//RECT-COLISOR
 	private Rectangle rect;
 	//VARIÁVEIS DE POSIÇÃO
@@ -39,6 +43,7 @@ public class Player {
 	private int dx;
 	private int dy;
 	//--------------------------------------------
+
 
 	//CONSTRUCTOR---------------------------------
 	public Player(int x,int y) {
@@ -72,36 +77,40 @@ public class Player {
 	//KEY-LISTENERS-------------------------------
 	public void keyPressed(int k) {
 		if(!moved) {
-			if(k == Keyboard.UP_KEY) {
+			if(k == KeyEvent.VK_UP) {
 				up = true;
 				direction = 0;
 				return;
 				
 			}
-			if(k == Keyboard.RIGHT_KEY){
+			if(k == KeyEvent.VK_RIGHT){
 				right = true;
 				direction = 1;
 				return;
 				
 			}
-			if(k == Keyboard.LEFT_KEY) {
+			if(k == KeyEvent.VK_LEFT) {
 				direction = 2;
 				left = true;
 				return;
 				
 			}
-			if(k == Keyboard.DOWN_KEY) {
+			if(k == KeyEvent.VK_DOWN) {
 				down = true;
 				direction = 3;
 				return;
 				
 			}
+			if(true) {
+				
+			}
+
 		}
 	}
 	
 	public void keyReleased(int k) {
 		if(moved) {
-		if (k == Keyboard.UP_KEY)    {
+			if(k == KeyEvent.VK_UP) {
 			up     = false;
 			moved  = false;
 			before = 0;
@@ -109,7 +118,7 @@ public class Player {
 			return;
 
 		}
-		if (k == Keyboard.RIGHT_KEY) {
+			if(k == KeyEvent.VK_RIGHT){
 			right = false;
 			moved = false;
 			before = 1;
@@ -117,7 +126,7 @@ public class Player {
 			return;
 
 		}
-		if (k == Keyboard.LEFT_KEY)  {
+			if(k == KeyEvent.VK_LEFT) {
 			left  = false;
 			moved = false;
 			before = 2;
@@ -125,7 +134,7 @@ public class Player {
 			return;
 
 		}
-		if (k == Keyboard.DOWN_KEY)  {
+			if(k == KeyEvent.VK_DOWN) {
 			down  = false;
 			moved = false;
 			before = 3;
@@ -150,21 +159,21 @@ public class Player {
 				posY -= 1 * SCALE;
 				line += 1;
 				return;
-			}
+			}else 
 			if(right && posX+WIDTH < 700-WIDTH) {
 				dx = -24;
 				moved = true;
 				direction=1;
 				posX += 1 * SCALE;
 				return;
-			}	
+			}else
 			if(left  && posX > 100 + WIDTH) {
 				dx = +24;
 				moved = true;
 				direction=2;
 				posX -= 1 * SCALE;
 				return;
-			}
+			}else
 			if(down  && posY+HEIGHT < 600-HEIGHT) {
 				dy = -24;
 				moved = true;
@@ -188,7 +197,8 @@ public class Player {
 	}
 	//--------------------------------------------
 	
-	//COLLISIONS 
+	//COLLISIONS
+	/**@deprecated*/
 	public boolean collided(Rectangle other) {
 		if(rect.intersects(other)) {
 			return true;
@@ -196,5 +206,20 @@ public class Player {
 		return false;
 	}
 	//--------------------------------------------
+	
+	//GETTERS-------------------------------------
+	public int getLine() {
+		return line;
+	}
+	
+	public Rectangle getRect() {
+		return rect;
+	}
+	
+	public int getPoints() {
+		return points;
+	}
+	//--------------------------------------------
+
 
 }

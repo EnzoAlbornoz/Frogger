@@ -12,6 +12,7 @@ import br.ufsc.enzo.frog.maps.Map;
 import br.ufsc.enzo.frog.maps.MapLevel1;
 import br.ufsc.enzo.frog.models.Vehicle;
 import br.ufsc.enzo.frog.models.Player;
+import br.ufsc.enzo.frog.utils.Collisions;
 import br.ufsc.enzo.frog.utils.Utils;
 
 public class PlayState extends GameState {
@@ -19,11 +20,10 @@ public class PlayState extends GameState {
 	private Player player;
 	private MapLevel1 map;
 	private Vehicle en1;
-	
+	private int dificulty;
 
 	public PlayState(GameStateManager gsm) {
 		super(gsm);
-		
 	}
 
 	
@@ -35,16 +35,16 @@ public class PlayState extends GameState {
 
 	
 	public void update() {
-		en1.update();
 		player.update();
+		en1.update();
 
 	}
 
 	
 	public void draw(Graphics g) {
 		map.draw(g);
-		en1.draw(g);
 		player.draw(g);
+		en1.draw(g);
 	}
 
 	
@@ -63,4 +63,9 @@ public class PlayState extends GameState {
 		player.keyTyped(k);
 	}
 	
+	public void colides(Player player,Vehicle[][] vehicles) {
+		if(Collisions.hasCollided(player, vehicles)) {
+			gsm.setState(new GameOverState(gsm,player.getPoints()));
+		}
+	}
 }

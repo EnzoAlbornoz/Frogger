@@ -34,4 +34,5 @@ public class GameStateManager {
 	public void setState(GameState state) {
 		states.push(state);
 	}
+	
 }
