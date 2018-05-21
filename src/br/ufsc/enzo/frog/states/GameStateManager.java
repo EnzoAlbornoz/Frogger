@@ -1,6 +1,7 @@
 package br.ufsc.enzo.frog.states;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.Stack;
 
 public class GameStateManager {

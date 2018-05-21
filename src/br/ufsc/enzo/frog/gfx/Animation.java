@@ -7,12 +7,13 @@ public class Animation {
 	private int speed;	
 	private int index;
 	private int ending;
+	
 	private long lastTime;
 	private long timer = 0;
-	
+	//FRAME-VECTOR--------------------------------
 	private BufferedImage[] frames;
-	
-	
+	//--------------------------------------------
+	//CONSTRUCTOR---------------------------------
 	public Animation(int speed,BufferedImage[] imgs) {
 		this.speed  = speed;
 		this.frames = imgs;
@@ -20,7 +21,29 @@ public class Animation {
 		lastTime = System.currentTimeMillis();
 		ending = frames.length;
 	}
+	//--------------------------------------------
 	
+	
+	//METHODS-------------------------------------
+	public BufferedImage getThisImage(int i) {
+		return frames[i];
+	}
+	
+	public BufferedImage getCurrentFrame() {
+		return frames[index];
+	}
+	
+	public void setCurrentFrame(int frame) {
+		index = frame;
+	}
+	//--------------------------------------------
+	
+	
+	
+	
+	
+	
+	//NON-USING-----------------------------------
 	public void update() {
 		timer += System.currentTimeMillis() - lastTime;
 		lastTime = System.currentTimeMillis();
@@ -33,23 +56,6 @@ public class Animation {
 			}
 		}
 	}
-	
-	public BufferedImage getThisImage(int i) {
-		return frames[i];
-	}
-	
-	public BufferedImage getCurrentFrame() {
-		return frames[index];
-	}
-	
-	public void setCurrentFrame(int frame) {
-		index = frame;
-	}
-	
-	
-	
-	
-	
 	/*OLD-----------------------------------------
 	
 	

@@ -11,7 +11,6 @@ import jplay.GameImage;
 
 public class Sprite {
 	
-	private GameImage[] spriteList;
 	private int spriteSize;
 	private BufferedImage spriteSheet;
 	

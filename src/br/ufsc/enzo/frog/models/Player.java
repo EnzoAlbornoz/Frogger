@@ -1,6 +1,7 @@
 package br.ufsc.enzo.frog.models;
 
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
@@ -19,6 +20,7 @@ public class Player {
 	//VARIÁVEIS DE POSIÇÃO
 	private int posX;
 	private int posY;
+	private int line;
 	//GRAFICOS
 	private static final int SCALE  = 48;
 	private static final int WIDTH  = 48;
@@ -34,8 +36,6 @@ public class Player {
 	//ANIMATION
 	private Animation anim;
 	private BufferedImage[] spriteList;
-	private boolean moving = false;
-	private boolean wasAnimated = false;
 	private int dx;
 	private int dy;
 	//--------------------------------------------
@@ -46,7 +46,7 @@ public class Player {
 		posY = y;
 		rect = new Rectangle();
 		rect.setBounds(posX, posX, WIDTH, HEIGHT);
-		spriteList = Sprite.createLinearSpriteList("res/Player/Frog Color 1a.png", 48);		
+		spriteList = Sprite.createLinearSpriteList("res/Player/Frog Color 1.png", 48);		
 		anim = new Animation(200, spriteList);
 	}
 	//--------------------------------------------
@@ -55,6 +55,7 @@ public class Player {
 	//UPDATE--------------------------------------
 	public void update() {
 		move();
+		rect.setLocation(posX, posY);
 	}
 	//--------------------------------------------
 	
@@ -70,7 +71,7 @@ public class Player {
 	
 	//KEY-LISTENERS-------------------------------
 	public void keyPressed(int k) {
-		
+		if(!moved) {
 			if(k == Keyboard.UP_KEY) {
 				up = true;
 				direction = 0;
@@ -95,11 +96,11 @@ public class Player {
 				return;
 				
 			}
-			
+		}
 	}
 	
 	public void keyReleased(int k) {
-		
+		if(moved) {
 		if (k == Keyboard.UP_KEY)    {
 			up     = false;
 			moved  = false;
@@ -132,6 +133,7 @@ public class Player {
 			return;
 
 		}
+		}
 	}
 	
 	public void keyTyped(int k) {}
@@ -146,6 +148,7 @@ public class Player {
 				moved = true;
 				direction=0;
 				posY -= 1 * SCALE;
+				line += 1;
 				return;
 			}
 			if(right && posX+WIDTH < 700-WIDTH) {
@@ -167,6 +170,7 @@ public class Player {
 				moved = true;
 				direction=3;
 				posY += 1 * SCALE;
+				line -= 1;
 				return;
 			}
 		}
@@ -177,10 +181,20 @@ public class Player {
 	//ANIMATION-METHODS---------------------------
 	private BufferedImage getCurrentAnimationFrame() {
 		if(moved) {
-					return anim.getThisImage(9-(3*direction));
+			return anim.getThisImage(9-(3*direction));
 		}else {
 			return anim.getThisImage(10-(3*before));
 		}
 	}
 	//--------------------------------------------
+	
+	//COLLISIONS 
+	public boolean collided(Rectangle other) {
+		if(rect.intersects(other)) {
+			return true;
+		}
+		return false;
+	}
+	//--------------------------------------------
+
 }

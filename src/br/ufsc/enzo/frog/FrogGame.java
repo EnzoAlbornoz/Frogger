@@ -32,6 +32,7 @@ public class FrogGame extends JPanel implements Runnable,KeyListener{
 		setFocusable(true);
 		requestFocus();
 		addKeyListener(this);
+		setDoubleBuffered(true);
 		//OUTRAS COISAS PARA INICIALIZAR
 	}
 	//AVISA QUE O PANEL FOI INICIALIZADO
@@ -76,7 +77,6 @@ public class FrogGame extends JPanel implements Runnable,KeyListener{
 			/*FIM DO UPTADE*/			
 			elapsed = System.nanoTime() - start;
 			wait = Math.abs(targetTime - (elapsed / 1000000));
-			
 			try {
 				thread.sleep(wait);
 			}catch (InterruptedException e) {
@@ -97,7 +97,6 @@ public class FrogGame extends JPanel implements Runnable,KeyListener{
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 		gsm.draw(g);
 
-		
 	}
 	
 	

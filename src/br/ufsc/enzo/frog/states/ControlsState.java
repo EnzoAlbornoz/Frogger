@@ -1,6 +1,7 @@
 package br.ufsc.enzo.frog.states;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 public class ControlsState extends GameState {
 
