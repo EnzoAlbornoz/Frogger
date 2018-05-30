@@ -1,7 +1,11 @@
 package br.ufsc.enzo.frog.states;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+
+import br.ufsc.enzo.frog.FrogGame;
+import br.ufsc.enzo.frog.utils.LastGames;
 
 public class CreditsState extends GameState {
 
@@ -23,7 +27,9 @@ public class CreditsState extends GameState {
 
 	
 	public void draw(Graphics g) {
-
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, FrogGame.WIDTH, FrogGame.HEIGHT);
+		LastGames.show(g);
 		
 	}
 

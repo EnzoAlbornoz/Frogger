@@ -12,6 +12,8 @@ import br.ufsc.enzo.frog.maps.Map;
 import br.ufsc.enzo.frog.maps.MapLevel1;
 import br.ufsc.enzo.frog.models.Vehicle;
 import br.ufsc.enzo.frog.models.Player;
+import br.ufsc.enzo.frog.models.Points;
+import br.ufsc.enzo.frog.models.Transit;
 import br.ufsc.enzo.frog.utils.Collisions;
 import br.ufsc.enzo.frog.utils.Utils;
 
@@ -19,8 +21,9 @@ public class PlayState extends GameState {
 	
 	private Player player;
 	private MapLevel1 map;
-	private Vehicle en1;
+	private Transit transit;
 	private int dificulty;
+	private Points points;
 
 	public PlayState(GameStateManager gsm) {
 		super(gsm);
@@ -28,23 +31,29 @@ public class PlayState extends GameState {
 
 	
 	public void init() {
-		player = new Player(111, 545);
+		player = new Player((111+(48*5)), 545);
 		map = new MapLevel1("res/Scenes/Mapa1.png",111,24);
-		en1 = new Vehicle(0, 0, 1);
+		dificulty = 0;
+		transit = new Transit(dificulty);
+		points = new Points();
 	}
 
 	
 	public void update() {
 		player.update();
-		en1.update();
-
+		transit.update();
+		transit.verifyBounds();
+		colides(player,transit);
+		points.update(player);
+		toNextLevel();
 	}
 
 	
 	public void draw(Graphics g) {
 		map.draw(g);
 		player.draw(g);
-		en1.draw(g);
+		transit.draw(g);
+		points.draw(g);
 	}
 
 	
@@ -62,10 +71,20 @@ public class PlayState extends GameState {
 	public void keyTyped(int k) {
 		player.keyTyped(k);
 	}
-	
-	public void colides(Player player,Vehicle[][] vehicles) {
-		if(Collisions.hasCollided(player, vehicles)) {
-			gsm.setState(new GameOverState(gsm,player.getPoints()));
+	//STATE-METHODS-------------------------------
+	public void colides(Player player,Transit transit) {
+		if(Collisions.collides(player, transit)) {
+			gsm.setState(new GameOverState(gsm,points));
 		}
 	}
+	
+	public void toNextLevel() {
+		if(player.getLine() == 11) {
+			dificulty++;
+			player = new Player((111+(48*5)),545);
+			transit = new Transit(dificulty);
+			points.setDificulty(dificulty);
+		}
+	}
+	//--------------------------------------------
 }

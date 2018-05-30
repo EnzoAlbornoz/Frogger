@@ -17,11 +17,9 @@ import jplay.URL;
 
 @SuppressWarnings("serial")
 public class Player {
-	//VARIÁVEIS DE GAMEPLAY
-	private int points;
 	//RECT-COLISOR
 	private Rectangle rect;
-	//VARIÁVEIS DE POSIÇÃO
+	//VARIÃ�VEIS DE POSIÃ‡ÃƒO
 	private int posX;
 	private int posY;
 	private int line;
@@ -29,7 +27,7 @@ public class Player {
 	private static final int SCALE  = 48;
 	private static final int WIDTH  = 48;
 	private static final int HEIGHT = 48;
-	//MOVIMENTAÇÃO
+	//MOVIMENTAÃ‡ÃƒO
 	private boolean     up = false;
 	private boolean  right = false;
 	private boolean   left = false;
@@ -197,16 +195,6 @@ public class Player {
 	}
 	//--------------------------------------------
 	
-	//COLLISIONS
-	/**@deprecated*/
-	public boolean collided(Rectangle other) {
-		if(rect.intersects(other)) {
-			return true;
-		}
-		return false;
-	}
-	//--------------------------------------------
-	
 	//GETTERS-------------------------------------
 	public int getLine() {
 		return line;
@@ -215,9 +203,14 @@ public class Player {
 	public Rectangle getRect() {
 		return rect;
 	}
-	
-	public int getPoints() {
-		return points;
+	public int getPosX() {
+		return posX;
+	}
+	public int getPosY() {
+		return posY;
+	}
+	public Rectangle getBounds() {
+		return (new Rectangle(posX+6,posY+6,WIDTH-12, HEIGHT-12));
 	}
 	//--------------------------------------------
 
