@@ -12,7 +12,7 @@ import jplay.Keyboard;
 
 public class MenuState extends GameState {
 
-	private String[] options = {"Jogar","Controles","Creditos","Sair",};
+	private String[] options = {"Play","Controls","Scores","Sair",};
 	private int actualOption = 0;
 	private GameImage menuTitle = new GameImage("res/menuTitle.png");
 			
@@ -31,10 +31,10 @@ public class MenuState extends GameState {
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect(0, 0, FrogGame.WIDTH, FrogGame.HEIGHT);
 		g.drawImage(menuTitle.image, 100, 0,Color.BLACK, null);
-		//DEFINE AS CONFIGS DAS OPÇÕES
+		//DEFINE AS CONFIGS DAS OPÃ‡Ã•ES
 		g.setColor(Color.GREEN);
 		g.setFont(new Font("Arial",Font.BOLD,35));
-		//DESENHA AS OPÇÕES NA TELA
+		//DESENHA AS OPÃ‡Ã•ES NA TELA
 		for(int i = 0;i < options.length;i++) {
 			g.drawString(options[i], 325, 385 + i * 50);
 	
@@ -54,7 +54,7 @@ public class MenuState extends GameState {
 			}
 			return;
 		}
-		//TRANSIÇÃO PARA O PRÓXIMO CENÁRIO
+		//TRANSIÃ‡ÃƒO PARA O PRÃ“XIMO CENÃ�RIO
 		if(k == Keyboard.ENTER_KEY) {
 			switch(actualOption) {
 				case 0:

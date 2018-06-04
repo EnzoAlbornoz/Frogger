@@ -13,7 +13,7 @@ public class Points {
 	
 	//CONSTRUCTOR---------------------------------
 	public Points() {
-		points = 000;
+		points = 0;
 		firstMid = true;
 	}
 	//--------------------------------------------
@@ -39,6 +39,19 @@ public class Points {
 	//GETTERS-&&-SETTERS--------------------------
 	public int getPoints() {
 		return points;
+	}
+	
+	public String getPointsString() {
+		if(points < 10) {
+			return "000"+points;
+		}
+		if(points < 100){
+			return "00"+points;
+		}
+		if(points < 1000) {
+			return "0" + points;
+		}
+		return ("" + points);
 	}
 	public void setDificulty(int dificulty) {
 		this.dificulty = dificulty;

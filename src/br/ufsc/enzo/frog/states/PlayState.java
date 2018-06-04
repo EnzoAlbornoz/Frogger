@@ -1,5 +1,6 @@
 package br.ufsc.enzo.frog.states;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -9,7 +10,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import br.ufsc.enzo.frog.maps.Map;
-import br.ufsc.enzo.frog.maps.MapLevel1;
 import br.ufsc.enzo.frog.models.Vehicle;
 import br.ufsc.enzo.frog.models.Player;
 import br.ufsc.enzo.frog.models.Points;
@@ -20,7 +20,7 @@ import br.ufsc.enzo.frog.utils.Utils;
 public class PlayState extends GameState {
 	
 	private Player player;
-	private MapLevel1 map;
+	private Map map;
 	private Transit transit;
 	private int dificulty;
 	private Points points;
@@ -32,7 +32,7 @@ public class PlayState extends GameState {
 	
 	public void init() {
 		player = new Player((111+(48*5)), 545);
-		map = new MapLevel1("res/Scenes/Mapa1.png",111,24);
+		map = new Map("res/Scenes/Mapa1.png",111,24);
 		dificulty = 0;
 		transit = new Transit(dificulty);
 		points = new Points();
@@ -54,6 +54,7 @@ public class PlayState extends GameState {
 		player.draw(g);
 		transit.draw(g);
 		points.draw(g);
+		spawnHide(g);
 	}
 
 	
@@ -87,4 +88,10 @@ public class PlayState extends GameState {
 		}
 	}
 	//--------------------------------------------
+	//HIDE-SPAWNER--------------------------------
+	private void spawnHide(Graphics g) {
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, 112, 600);
+		g.fillRect(686, 0, 115,600);
+	}
 }
