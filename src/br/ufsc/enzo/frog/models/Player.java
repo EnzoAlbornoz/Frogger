@@ -9,7 +9,6 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 
-import br.ufsc.enzo.frog.gfx.Animation;
 import br.ufsc.enzo.frog.gfx.Sprite;
 import jplay.GameImage;
 import jplay.Keyboard;
@@ -36,7 +35,6 @@ public class Player {
 	private int before = 0; 
 	private boolean moved = false;
 	//ANIMATION
-	private Animation anim;
 	private BufferedImage[] spriteList;
 	private int dx;
 	private int dy;
@@ -50,7 +48,6 @@ public class Player {
 		rect = new Rectangle();
 		rect.setBounds(posX, posX, WIDTH, HEIGHT);
 		spriteList = Sprite.createLinearSpriteList("res/Player/Frog Color 1.png", 48);		
-		anim = new Animation(200, spriteList);
 	}
 	//--------------------------------------------
 
@@ -188,9 +185,9 @@ public class Player {
 	//ANIMATION-METHODS---------------------------
 	private BufferedImage getCurrentAnimationFrame() {
 		if(moved) {
-			return anim.getThisImage(9-(3*direction));
+			return spriteList[9-(3*direction)];
 		}else {
-			return anim.getThisImage(10-(3*before));
+			return spriteList[10-(3*before)];
 		}
 	}
 	//--------------------------------------------
