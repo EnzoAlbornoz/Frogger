@@ -8,15 +8,7 @@ import java.awt.image.BufferedImage;
 
 import br.ufsc.enzo.frog.utils.Utils;
 
-public class Vehicle {
-	//ATRIBUTES-----------------------------------
-	private Rectangle rect;
-	private int size;
-	private double velocity = 1;
-	private BufferedImage sprite;
-	private int posX;
-	private int posY;
-	//--------------------------------------------
+public class Vehicle extends Mob {
 	//CONSTRUCTORS--------------------------------
 	public Vehicle(int type,int dificulty,int line) {
 		if(type == 1) {
