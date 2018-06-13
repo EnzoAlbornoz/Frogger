@@ -3,6 +3,9 @@ package br.ufsc.enzo.frog.models;
 import java.awt.Graphics;
 import java.util.Random;
 
+import br.ufsc.enzo.frog.states.GameOverState;
+import br.ufsc.enzo.frog.states.GameStateManager;
+
 public class Transit {
 	//ATRIBUTES-----------------------------------
 	private Vehicle[][] transit;
@@ -37,7 +40,7 @@ public class Transit {
 	//--------------------------------------------
 	
 	//GAME-LOOP-----------------------------------
-		public void update() {
+		public void update(Player player,GameStateManager gsm,Points points) {
 			for(int i = 0;i < transit.length;i++) {
 				for(int j = 0;j < transit[i].length;j++) {
 					if(transit[i][j] != null) {
@@ -45,6 +48,8 @@ public class Transit {
 					}
 				}
 			}
+			this.verifyBounds();
+			this.crash(player,gsm,points);
 		}
 		public void draw(Graphics g) {
 			for(int i = 0;i < transit.length;i++) {
@@ -56,7 +61,7 @@ public class Transit {
 			}
 		}
 	//TRANSIT-GENERATE----------------------------
-	public void verifyBounds() {
+	private void verifyBounds() {
 		for(int i = 0;i < transit.length;i++) {
 			for(int j = 0;j < transit[i].length;j++) {
 				if(transit[i][j] != null) {
@@ -76,4 +81,31 @@ public class Transit {
 		return transit;
 	}
 	//--------------------------------------------
+	
+	//WIP-----------------------------------------
+	private boolean colided(Player player,Vehicle v) {
+		if(v != null) {
+			if((player.getBounds()).intersects(v.getBounds())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean collides(Player player) {
+		for(int i = 0;i < transit.length;i++) {
+			for(int j = 0;j < transit[i].length;j++) {
+				if(colided(player,transit[i][j])) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public void crash(Player player,GameStateManager gsm,Points points) {
+		if(this.collides(player)) {
+			gsm.setState(new GameOverState(gsm, points));
+		}
+	}
 }

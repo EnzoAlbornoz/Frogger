@@ -10,6 +10,8 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 
 import br.ufsc.enzo.frog.gfx.Sprite;
+import br.ufsc.enzo.frog.states.GameOverState;
+import br.ufsc.enzo.frog.states.GameStateManager;
 import jplay.GameImage;
 import jplay.Keyboard;
 import jplay.URL;
@@ -53,9 +55,19 @@ public class Player {
 
 	
 	//UPDATE--------------------------------------
-	public void update() {
+	public void update(GameStateManager gsm,Points points) {
 		move();
 		rect.setLocation(posX, posY);
+		verifyBounds(gsm,points);
+	}
+	public void lockBoundsWith(Floatable f) {
+		posX += f.velocity;
+		rect.setLocation(posX, posY);
+	}
+	private void verifyBounds(GameStateManager gsm,Points points) {
+		if(posX < 100 + WIDTH || posX+WIDTH > 700-WIDTH) {
+			gsm.setState(new GameOverState(gsm,points));
+		}
 	}
 	//--------------------------------------------
 	

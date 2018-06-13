@@ -11,10 +11,11 @@ import javax.imageio.ImageIO;
 
 import br.ufsc.enzo.frog.maps.Map;
 import br.ufsc.enzo.frog.models.Vehicle;
+import br.ufsc.enzo.frog.models.Floatable;
 import br.ufsc.enzo.frog.models.Player;
 import br.ufsc.enzo.frog.models.Points;
+import br.ufsc.enzo.frog.models.River;
 import br.ufsc.enzo.frog.models.Transit;
-import br.ufsc.enzo.frog.utils.Collisions;
 import br.ufsc.enzo.frog.utils.Utils;
 
 public class PlayState extends GameState {
@@ -24,7 +25,8 @@ public class PlayState extends GameState {
 	private Transit transit;
 	private int dificulty;
 	private Points points;
-
+	private River river;
+	
 	public PlayState(GameStateManager gsm) {
 		super(gsm);
 	}
@@ -36,14 +38,14 @@ public class PlayState extends GameState {
 		dificulty = 0;
 		transit = new Transit(dificulty);
 		points = new Points();
+		river = new River(dificulty);
 	}
 
 	
 	public void update() {
-		player.update();
-		transit.update();
-		transit.verifyBounds();
-		colides(player,transit);
+		player.update(gsm,points);
+		transit.update(player,gsm,points);
+		river.update(player,gsm,points);
 		points.update(player);
 		toNextLevel();
 	}
@@ -51,10 +53,11 @@ public class PlayState extends GameState {
 	
 	public void draw(Graphics g) {
 		map.draw(g);
-		player.draw(g);
 		transit.draw(g);
 		points.draw(g);
+		river.draw(g);
 		spawnHide(g);
+		player.draw(g);
 	}
 
 	
@@ -73,12 +76,6 @@ public class PlayState extends GameState {
 		player.keyTyped(k);
 	}
 	//STATE-METHODS-------------------------------
-	public void colides(Player player,Transit transit) {
-		if(Collisions.collides(player, transit)) {
-			gsm.setState(new GameOverState(gsm,points));
-		}
-	}
-	
 	public void toNextLevel() {
 		if(player.getLine() == 11) {
 			dificulty++;

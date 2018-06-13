@@ -54,13 +54,13 @@ public class Vehicle extends Mob {
 	//GAME-LOOP-----------------------------------
 	public void update() {
 		move();
-		rect.setLocation(posX, posY);
 	}
 	public void draw(Graphics g) {
 		g.drawImage(sprite, posX, posY, null);
 	}	
 	public void move() {
 		posX += velocity;
+		rect.setLocation(posX, posY);
 	}	
 	//--------------------------------------------
 	

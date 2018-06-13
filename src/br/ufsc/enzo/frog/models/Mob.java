@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-public class Mob {
+public abstract class Mob {
 	//ATRIBUTES-----------------------------------
 		protected Rectangle rect;
 		protected int size;
@@ -13,7 +13,7 @@ public class Mob {
 		protected int posX;
 		protected int posY;
 		//--------------------------------------------
-		protected void draw(Graphics g) {};
-		protected void update() {};
-		protected void move() {};
+		public abstract void draw(Graphics g);
+		public abstract void update();
+		public abstract void move();
 }
