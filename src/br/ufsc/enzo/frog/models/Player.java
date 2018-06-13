@@ -65,8 +65,10 @@ public class Player {
 		rect.setLocation(posX, posY);
 	}
 	private void verifyBounds(GameStateManager gsm,Points points) {
-		if(posX < 100 + WIDTH || posX+WIDTH > 700-WIDTH) {
-			gsm.setState(new GameOverState(gsm,points));
+		if(line > 6 && line < 12) {
+			if(posX < 112 - WIDTH || posX > 700) {
+				gsm.setState(new GameOverState(gsm,points));
+			}
 		}
 	}
 	//--------------------------------------------

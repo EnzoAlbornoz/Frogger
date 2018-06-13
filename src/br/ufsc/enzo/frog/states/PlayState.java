@@ -56,8 +56,8 @@ public class PlayState extends GameState {
 		transit.draw(g);
 		points.draw(g);
 		river.draw(g);
-		spawnHide(g);
 		player.draw(g);
+		spawnHide(g);
 	}
 
 	

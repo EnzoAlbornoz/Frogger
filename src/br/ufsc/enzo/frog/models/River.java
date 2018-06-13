@@ -81,7 +81,7 @@ public class River {
 		}
 		//--------------------------------------------
 		private void riverFlux(Player player,GameStateManager gsm,Points points) {
-			if(player.getLine() < 12 && player.getLine() > 6) {
+			if(player.getLine() < 11 && player.getLine() > 6) {
 				if(!overFloatable(player)) {
 					gsm.setState(new GameOverState(gsm,points));
 				}
