@@ -76,7 +76,7 @@ public class PlayState extends GameState {
 		player.keyTyped(k);
 	}
 	//STATE-METHODS-------------------------------
-	public void toNextLevel() {
+	private void toNextLevel() {
 		if(player.getLine() == 11) {
 			dificulty++;
 			player = new Player((111+(48*5)),545);

@@ -15,7 +15,7 @@ public class FrogGame extends JPanel implements Runnable,KeyListener{
 	//ARRUMAR FPS
 	private int FPS = 60;
 	private long targetTime = 1000 / FPS;
-	//DIMENÇÕES DO JOGO
+	//DIMENÃ‡Ã•ES DO JOGO
 	public static final int WIDTH  = 800;
 	public static final int HEIGHT = 600;
 	//COISAS DE THREAD
@@ -41,7 +41,7 @@ public class FrogGame extends JPanel implements Runnable,KeyListener{
 		isPaused = false;
 		startGame();
 	}
-	//INICALIZAÇÃO DO THREAD
+	//INICALIZAÃ‡ÃƒO DO THREAD
 	private void startGame() {
 		if(thread == null) {
 			thread = new Thread(this);
@@ -49,15 +49,15 @@ public class FrogGame extends JPanel implements Runnable,KeyListener{
 		}
 		
 	}
-	//LAÇO PRINCIPAL DO GAME
+	//LAÃ‡O PRINCIPAL DO GAME
 	public void run() {
 		/* VAI INICIALIZAR ALGUMAS VARIAVEIS/OBJETOS */
 		//-------
-		/* DEFINIÇÃO DE VARIAVEL PARA CRIAR FPS
+		/* DEFINIÃ‡ÃƒO DE VARIAVEL PARA CRIAR FPS
 		   COMO FUNCIONA:
 		   PEGAMOS UM TEMPO INICIAL E FAZEMOS O GAME-LOOP			
-		   ENTÃO MANDAMOS O THREAD 'DORMIR' PELO TEMPO
-		   CALCULADO,ASSIM GERAMOS O PRÓXIMO FRAME SÓ 
+		   ENTÃƒO MANDAMOS O THREAD 'DORMIR' PELO TEMPO
+		   CALCULADO,ASSIM GERAMOS O PRÃ“XIMO FRAME SÃ“ 
 		   DEPOIS DE +- 16ms.
 		   LOGO: wait = Frame[k+1] - Frame[k]
 		   (wait = delta of frames)	 				*/
@@ -86,13 +86,13 @@ public class FrogGame extends JPanel implements Runnable,KeyListener{
 		
 	}
 	
-	private synchronized void gameUpdate() {
+	private void gameUpdate() {
 		if (!isPaused) {
-			gsm.update();								//DÁ UPDATE NAS VARIAVEIS DO JOGO
+			gsm.update();								//DÃ� UPDATE NAS VARIAVEIS DO JOGO
 		}
 	}
 	
-	protected synchronized void paintComponent(Graphics g) {
+	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 		gsm.draw(g);

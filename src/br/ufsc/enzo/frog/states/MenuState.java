@@ -3,18 +3,17 @@ package br.ufsc.enzo.frog.states;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 import br.ufsc.enzo.frog.FrogGame;
-import jplay.GameImage;
-import jplay.Keyboard;
+import br.ufsc.enzo.frog.utils.Utils;
 
 public class MenuState extends GameState {
 
 	private String[] options = {"Play","Controls","Scores","Sair",};
 	private int actualOption = 0;
-	private GameImage menuTitle = new GameImage("res/menuTitle.png");
+	private BufferedImage menuTitle = Utils.loadImage("res/menuTitle.png");
 			
 	public MenuState(GameStateManager gsm) {
 		super(gsm);
@@ -30,7 +29,7 @@ public class MenuState extends GameState {
 		//MOSTRA O FUNDO
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect(0, 0, FrogGame.WIDTH, FrogGame.HEIGHT);
-		g.drawImage(menuTitle.image, 100, 0,Color.BLACK, null);
+		g.drawImage(menuTitle, 100, 0,Color.BLACK, null);
 		//DEFINE AS CONFIGS DAS OPÃ‡Ã•ES
 		g.setColor(Color.GREEN);
 		g.setFont(new Font("Arial",Font.BOLD,35));
@@ -42,20 +41,20 @@ public class MenuState extends GameState {
 		g.drawString(">", 300, 385 + actualOption * 50);
 	}
 	public void keyPressed(int k) {
-		if(k == Keyboard.UP_KEY) {
+		if(k == KeyEvent.VK_UP) {
 			if(actualOption > 0) {
 				actualOption--;
 			}
 			return;
 		}
-		if(k == Keyboard.DOWN_KEY) {
+		if(k == KeyEvent.VK_DOWN) {
 			if(actualOption < options.length - 1) {
 				actualOption++;
 			}
 			return;
 		}
 		//TRANSIÃ‡ÃƒO PARA O PRÃ“XIMO CENÃ�RIO
-		if(k == Keyboard.ENTER_KEY) {
+		if(k == KeyEvent.VK_ENTER) {
 			switch(actualOption) {
 				case 0:
 					gsm.setState(new PlayState(gsm));

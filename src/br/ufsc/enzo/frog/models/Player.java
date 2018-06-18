@@ -211,9 +211,6 @@ public class Player {
 		return line;
 	}
 	
-	public Rectangle getRect() {
-		return rect;
-	}
 	public int getPosX() {
 		return posX;
 	}

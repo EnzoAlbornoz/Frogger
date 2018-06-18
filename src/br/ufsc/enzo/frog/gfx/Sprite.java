@@ -46,7 +46,7 @@ public class Sprite {
 	 * @param size - size of the 1:1 sprite
 	 * @return A cropped sprite sheet in a matrix
 	 */
-	public static BufferedImage[][] createSpriteList(String filePath,int size) {
+	public static BufferedImage[][] createSpriteMatrix(String filePath,int size) {
 		BufferedImage sheet = null;
 		try {
 			sheet = ImageIO.read(new File(filePath));
@@ -72,21 +72,21 @@ public class Sprite {
 		return out;
 	}
 	
-	public static BufferedImage[] createLineOfSpriteList(String filePath,int size,int line) {
-		BufferedImage[][] m = createSpriteList(filePath, size);
+	public static BufferedImage[] createLineOfSpriteMatrix(String filePath,int size,int line) {
+		BufferedImage[][] m = createSpriteMatrix(filePath, size);
 		BufferedImage[] sheet = new BufferedImage[m[line].length];
 		sheet = m[line];
 		return sheet;
 	}
 	
-	public static BufferedImage[] getLineOfSpriteList(BufferedImage[][] sheet,int line) {
+	public static BufferedImage[] getLineOfSpriteMatrix(BufferedImage[][] sheet,int line) {
 		BufferedImage[] out = new BufferedImage[sheet[line].length];
 		out = sheet[line];
 		return out;
 	}
 	
 	public static BufferedImage[] createLinearSpriteList(String filePath,int size) {
-		BufferedImage[][] m = createSpriteList(filePath, size);
+		BufferedImage[][] m = createSpriteMatrix(filePath, size);
 		BufferedImage[] out = new BufferedImage[(m.length*m[0].length)];
 		int c = 0;
 		for(int i = 0;i < m.length;i++) {

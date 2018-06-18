@@ -92,7 +92,7 @@ public class Transit {
 		return false;
 	}
 	
-	private boolean collides(Player player) {
+	private boolean colides(Player player) {
 		for(int i = 0;i < transit.length;i++) {
 			for(int j = 0;j < transit[i].length;j++) {
 				if(colided(player,transit[i][j])) {
@@ -104,7 +104,7 @@ public class Transit {
 	}
 	
 	public void crash(Player player,GameStateManager gsm,Points points) {
-		if(this.collides(player)) {
+		if(this.colides(player)) {
 			gsm.setState(new GameOverState(gsm, points));
 		}
 	}
